@@ -1,5 +1,5 @@
-# my-tmux
-My tmux config
+# my-nvim
+My nvim config
 
 ### Install
 
