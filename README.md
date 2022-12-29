@@ -5,7 +5,7 @@ My tmux config
 
 ```
 cd ~
-git clone git@github.com:MarMun/my_tmux.git .my_tmux
-cd .my_tmux
+git clone git@github.com:MarMun/my_nvim.git .my_nvim
+cd .my_nvim
 ./intall.sh
 ```
