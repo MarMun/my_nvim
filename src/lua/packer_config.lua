@@ -4,7 +4,7 @@ return require('packer').startup(function(use)
   -- packer (can manage itself)
   use 'wbthomason/packer.nvim'
 
-	-- file search
+	-- telescope (file search)
   use {
    'nvim-telescope/telescope.nvim', tag = '0.1.0',
    -- or, branch = '0.1.x',
@@ -14,7 +14,7 @@ return require('packer').startup(function(use)
   -- colorscheme
   use 'sainnhe/sonokai'
 
-  -- syntax highlighting
+  -- treesitter (syntax highlighting)
   use {
     'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'
   }
