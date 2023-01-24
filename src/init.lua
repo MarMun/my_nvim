@@ -11,5 +11,4 @@ vim.o.hlsearch = true
 vim.o.incsearch = true
 vim.o.scrolloff = 8
 -- vim.o.colorcolumn = "80"
-
 print("all set")
