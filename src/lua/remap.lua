@@ -4,6 +4,7 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>w", vim.cmd.w)
 
 vim.keymap.set("i", "jj", "<ESC>")
+vim.keymap.set("n", "//", vim.cmd.nohlsearch)
 
 vim.keymap.set("n", "<C-h>", "<C-W>h")
 vim.keymap.set("n", "<C-j>", "<C-W>j")
