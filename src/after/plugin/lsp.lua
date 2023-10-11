@@ -1,14 +1,18 @@
-local lsp = require('lsp-zero')
-lsp.preset('recommended')
+local lsp_zero = require('lsp-zero')
 
-lsp.ensure_installed({
-  'eslint',
-	'sumneko_lua'
-})
-
-lsp.on_attach(function (client, bufnr)
-  local opts = {buffer = bufnr, noremap = true, silent = true}
-  vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+lsp_zero.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp_zero.default_keymaps({buffer = bufnr})
 end)
 
-lsp.setup()
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  -- Replace the language servers listed here 
+  -- with the ones you want to install
+  ensure_installed = {'eslint', 'sumneko_lua'},
+  handlers = {
+    lsp_zero.default_setup,
+  },
+})
+
