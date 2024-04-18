@@ -7,6 +7,15 @@ vim.keymap.set("n", "<leader>e", vim.cmd.q)
 vim.keymap.set("n", "<leader>we", ':wq<CR>')
 vim.keymap.set("i", "jj", "<ESC>")
 
+-- terminal emulator
+vim.keymap.set("n", "<leader>tt", "<C-w><C-v>:term<CR>")
+vim.keymap.set("t", "jj", "<C-\\><C-n>")
+
+-- edit helper
+--- replace current word with yank
+vim.keymap.set("n", "<leader>S", '"_diwP')
+vim.keymap.set("n", "<leader>ml", 'ciw[<ESC>pa]()<ESC>ha')
+
 -- disable search highlight
 vim.keymap.set("n", "//", vim.cmd.nohlsearch)
 
