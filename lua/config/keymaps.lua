@@ -4,7 +4,7 @@
 
 -- shortcuts
 vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Save Buffer" })
-vim.keymap.set("n", "<leader>qe", vim.cmd.q, { desc = "Quit Buffer" })
+vim.keymap.set("n", "<leader>e", vim.cmd.q, { desc = "Quit Buffer" })
 vim.keymap.set("n", "<leader>we", ":wq<CR>", { desc = "Save & Quit Buffer" })
 vim.keymap.set("i", "jj", "<ESC>", { desc = "End Insert mode" })
 
