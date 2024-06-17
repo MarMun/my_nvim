@@ -8,14 +8,14 @@ return {
       -- vim.keymap.set('n', '<leader>fa', builtin.find_files, {})
       {
         "<leader>fa",
-        function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
+        function() require("telescope.builtin").git_files({ cwd = vim.fn.getcwd() }) end,
         desc = "Find Files All",
       },
       -- vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
       {
         "<leader>fg",
         function()
-          require("telescope.builtin").live_grep({ cwd = require("lazy.core.config").options.root })
+          require("telescope.builtin").live_grep({ cwd = vim.fn.getcwd() })
         end,
         desc = "Live Grep",
       },
@@ -43,6 +43,17 @@ return {
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
         winblend = 0,
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden", -- to include hidden files
+          "--glob=!.git/*", -- Exclude the .git directory
+        },
       },
     },
   },
