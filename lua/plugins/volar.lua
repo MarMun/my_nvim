@@ -6,7 +6,7 @@ return {
       -- Ensure key language servers like tsserver are installed using mason-lspconfig
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "tsserver", -- TypeScript language server
+          "ts_ls", -- TypeScript language server
           "eslint", -- ESLint language server
           "volar", -- Volar for Vue files
         },
