@@ -16,3 +16,7 @@ vim.keymap.set("n", "<leader>td", vim.cmd.tabclose, { desc = "Tab close" })
 
 -- undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree toggle" })
+
+-- keybinds for ai interaction
+vim.keymap.set("n", "<leader>cc", vim.cmd.LLMSuggestion, { desc = "AI Suggestion" })
+vim.keymap.set("n", "<leader>ct", vim.cmd.LLMToggleAutoSuggest, { desc = "AI Toggle Suggestion" })
