@@ -1,3 +1,6 @@
+--[[
+-- CRITICAL: https://github.com/nomnivore/ollama.nvim/compare/main...yamsergey:ollama.nvim:contribute
+--]]
 return {
   "nomnivore/ollama.nvim",
   dependencies = {
@@ -31,5 +34,13 @@ return {
   ---@type Ollama.Config
   opts = {
     -- your configuration overrides
+    prompts = {
+      Language_Identifier = {
+        prompt = "Tell what kind of programming language this is written in: $sel(ection)",
+        input_label = "> ",
+        model = "mistral",
+        action = "display",
+      },
+    },
   },
 }

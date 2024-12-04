@@ -22,11 +22,20 @@ vim.keymap.set("n", "<leader>cc", vim.cmd.LLMSuggestion, { desc = "AI Suggestion
 vim.keymap.set("n", "<leader>ct", vim.cmd.LLMToggleAutoSuggest, { desc = "AI Toggle Suggestion" })
 
 -- Ollama - Prompt menu
-vim.keymap.set("n", "<leader>oo", function()
-  vim.cmd("lua require('ollama').prompt()")
-end, { desc = "Ollama Prompt" })
+vim.keymap.set({ "n", "v" }, "<leader>oo", ":<c-u>lua require('ollama').prompt()<cr>", { desc = "Ollama Prompt" })
 
 -- Ollama - Direct prompting
-vim.keymap.set("n", "<leader>og", function()
-  vim.cmd("lua require('ollama').prompt('Generate_Code')")
-end, { desc = "Ollama Generate Code" })
+vim.keymap.set(
+  "n",
+  "<leader>og",
+  ":<c-u>lua require('ollama').prompt('Generate_Code')<cr>",
+  { desc = "Ollama Generate_Code" }
+)
+
+-- Ollama - Custom Prompt test
+vim.keymap.set(
+  { "n", "v" },
+  "<leader>ol",
+  ":<c-u>lua require('ollama').prompt('Language_Identifier')<cr>",
+  { desc = "Ollama Prompt" }
+)
