@@ -20,3 +20,13 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree togg
 -- keybinds for ai interaction
 vim.keymap.set("n", "<leader>cc", vim.cmd.LLMSuggestion, { desc = "AI Suggestion" })
 vim.keymap.set("n", "<leader>ct", vim.cmd.LLMToggleAutoSuggest, { desc = "AI Toggle Suggestion" })
+
+-- Ollama - Prompt menu
+vim.keymap.set("n", "<leader>oo", function()
+  vim.cmd("lua require('ollama').prompt()")
+end, { desc = "Ollama Prompt" })
+
+-- Ollama - Direct prompting
+vim.keymap.set("n", "<leader>og", function()
+  vim.cmd("lua require('ollama').prompt('Generate_Code')")
+end, { desc = "Ollama Generate Code" })
