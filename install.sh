@@ -53,6 +53,7 @@ elif [ "$os" = "Darwin" ]; then
   fi
   checkInstall "riprep" "rg"
   checkInstall "fd" "fd"
+  checkInstall "fzf" "fzf"
 
 fi
 
