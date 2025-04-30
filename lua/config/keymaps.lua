@@ -18,8 +18,12 @@ vim.keymap.set("n", "<leader>td", vim.cmd.tabclose, { desc = "Tab close" })
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree toggle" })
 
 -- keybinds for ai interaction
-vim.keymap.set("n", "<leader>cc", vim.cmd.LLMSuggestion, { desc = "AI Suggestion" })
-vim.keymap.set("n", "<leader>ct", vim.cmd.LLMToggleAutoSuggest, { desc = "AI Toggle Suggestion" })
+vim.keymap.set({ "n", "v" }, "<leader>cr", ":'<,'>GpRewrite<CR>", { desc = "AI Rewrite" })
+vim.keymap.set({ "n", "v" }, "<leader>ca", ":'<,'>GpAppend<CR>", { desc = "AI Rewrite" })
+vim.keymap.set({ "n", "v" }, "<leader>ci", ":'<,'>GpImplement<CR>", { desc = "AI Implement" })
+vim.keymap.set({ "n", "v" }, "<leader>cp", ":'<,'>GpPopup<CR>", { desc = "AI Popup" })
+vim.keymap.set({ "n", "v" }, "<leader>cc", ":GpContext<CR>", { desc = "AI Context" })
+vim.keymap.set({ "n", "v" }, "<leader>cs", ":GpContext<CR>", { desc = "AI Stop" })
 
 -- Ollama - Prompt menu
 vim.keymap.set({ "n", "v" }, "<leader>oo", ":<c-u>lua require('ollama').prompt()<cr>", { desc = "Ollama Prompt" })
