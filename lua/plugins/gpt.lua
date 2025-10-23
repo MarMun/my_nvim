@@ -8,6 +8,12 @@ return {
           endpoint = os.getenv("OPENROUTER_API_BASE"),
           secret = os.getenv("OPENROUTER_API_KEY"),
         },
+        n8n_coding = {
+          disable = false,
+          endpoint = os.getenv("N8N_CODING_API_BASE"),
+          secret = os.getenv("N8N_CODING_API_KEY"),
+          stream = false,
+        },
       },
       agents = {
         {
@@ -15,12 +21,11 @@ return {
           provider = "openrouter",
           chat = true,
           command = true,
-          model = { model = "openai/chatgpt-4o-latest" },
           system_prompt = "You explain and theorise about coding related topics",
         },
         {
           name = "Coding",
-          provider = "openrouter",
+          provider = "n8n_coding",
           chat = true,
           command = true,
           model = { model = "openai/gpt-5-codex" },
@@ -28,7 +33,7 @@ return {
         },
       },
 
-      default_chat_agent = "Chat",
+      default_chat_agent = "Coding",
       --
       -- For customization, refer to Install > Configuration in the Documentation/Readme
     }
