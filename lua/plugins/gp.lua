@@ -3,6 +3,11 @@ return {
   config = function()
     local conf = {
       providers = {
+        openai = {
+          -- wt... this is needed or command always use openai
+          -- even tho default_command_agent is set later
+          disable = true,
+        },
         openrouter = {
           disable = false,
           endpoint = os.getenv("OPENROUTER_API_BASE"),
@@ -12,7 +17,6 @@ return {
           disable = false,
           endpoint = os.getenv("N8N_CODING_API_BASE"),
           secret = os.getenv("N8N_CODING_API_KEY"),
-          stream = false,
         },
       },
       agents = {
@@ -21,6 +25,7 @@ return {
           provider = "openrouter",
           chat = true,
           command = true,
+          model = { model = "openai/gpt-5-codex" },
           system_prompt = "You explain and theorise about coding related topics",
         },
         {
@@ -33,7 +38,8 @@ return {
         },
       },
 
-      default_chat_agent = "Coding",
+      default_chat_agent = "Chat",
+      default_command_agent = "Coding",
       --
       -- For customization, refer to Install > Configuration in the Documentation/Readme
     }
