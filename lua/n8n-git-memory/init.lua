@@ -43,6 +43,21 @@ end
 local function git(args, cwd)
   return sh(vim.list_extend({ "git" }, args), cwd)
 end
+-- returns an array of tracked file paths for a repo/worktree
+local function list_tracked(cwd)
+  local out = { git({ "ls-files" }, cwd) } -- no -z, newline-separated
+  if not out[1] then
+    return {}
+  end
+  local text = table.concat(out[1], "\n")
+  local files = {}
+  for line in (text .. "\n"):gmatch("([^\n]+)\n") do
+    if #line > 0 then
+      table.insert(files, line)
+    end
+  end
+  return files
+end
 
 local function repo_root()
   local o = { git({ "rev-parse", "--show-toplevel" }) }
@@ -93,10 +108,21 @@ local function now_utc()
   return os.date("!%Y-%m-%dT%H:%M:%SZ")
 end
 
--- Worktree path: outside the repo (sibling folder)
+-- make a visible, safe folder name from repo (strip leading dots)
+local function safe_repo_dirname(root)
+  local name = vim.fn.fnamemodify(root, ":t")
+  name = name:gsub("^%.*", "") -- remove leading dots
+  if name == "" then
+    name = "repo"
+  end
+  return name
+end
+
+-- put worktree next to the repo, without double dots
 local function worktree_dir(root)
   local parent = vim.fn.fnamemodify(root, ":h")
-  return ("%s/.%s-n8n-sync"):format(parent, repo_name(root))
+  return ("%s/%s-n8n-sync"):format(parent, safe_repo_dirname(root))
+  -- if you prefer hidden: ("%s/.%s-n8n-sync"):format(parent, safe_repo_dirname(root))
 end
 
 local function copy_file(src, dst)
@@ -178,15 +204,17 @@ end
 
 -- One-time: copy all tracked files so shadow starts complete
 local function bootstrap_if_empty(root, wt_dir)
-  local wt_files = { git({ "ls-files", "-z" }, wt_dir) }
-  if wt_files[1] and table.concat(wt_files[1]) ~= "" then
+  local wt_files = list_tracked(wt_dir)
+  if #wt_files > 0 then
     return
   end
-  local root_files = { git({ "ls-files", "-z" }, root) }
-  if not root_files[1] then
+
+  local root_files = list_tracked(root)
+  if #root_files == 0 then
     return
   end
-  for path in (table.concat(root_files[1])):gmatch("([^\0]+)") do
+
+  for _, path in ipairs(root_files) do
     local src = root .. "/" .. path
     if vim.loop.fs_stat(src) and vim.fn.isdirectory(src) ~= 1 then
       copy_file(src, wt_dir .. "/" .. path)
