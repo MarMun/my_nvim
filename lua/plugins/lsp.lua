@@ -7,6 +7,8 @@ return {
         "tsserver", -- correct name (was "ts_ls" → wrong!)
         "eslint",
         "volar",
+        "jdtls",
+        "kotlin_language_server",
       },
     },
   },
@@ -42,6 +44,17 @@ return {
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
         end,
+      })
+
+      -- Kotlin
+      lspconfig.kotlin_language_server.setup({
+        settings = {
+          kotlin = {
+            formatting = {
+              formatter = "ktlint",
+            },
+          },
+        },
       })
     end,
   },
