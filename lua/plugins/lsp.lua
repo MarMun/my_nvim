@@ -48,6 +48,10 @@ return {
 
       -- Kotlin
       lspconfig.kotlin_language_server.setup({
+        on_attach = function(client, _)
+          -- Work around kotlin-language-server crash on document highlights
+          client.server_capabilities.documentHighlightProvider = false
+        end,
         settings = {
           kotlin = {
             formatting = {
