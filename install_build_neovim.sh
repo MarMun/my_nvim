@@ -14,14 +14,14 @@ cd "$NEOVIM_DIR" || {
   exit 1
 }
 
-# Check if on release-0.10 branch
-git checkout release-0.10 || {
-  echo "Failed to switch to release-0.10"
+# Check if on release-0.11 branch
+git checkout release-0.11 || {
+  echo "Failed to switch to release-0.11"
   exit 1
 }
 
 # Pull the latest changes
-git pull origin release-0.10 || {
+git pull origin release-0.11 || {
   echo "Failed to pull latest updates"
   exit 1
 }
@@ -32,14 +32,14 @@ rm -rf "$NEOVIM_DIR/.deps" "$NEOVIM_DIR/build" || {
   exit 1
 }
 
-# Build Neovim
-make CMAKE_BUILD_TYPE=Release || {
+# Build Neovim with local install prefix
+make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local" || {
   echo "Build failed"
   exit 1
 }
 
-# Install Neovim
-sudo make install || {
+# Install Neovim (no sudo needed for local install)
+make install || {
   echo "Installation failed"
   exit 1
 }
