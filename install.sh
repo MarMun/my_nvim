@@ -44,6 +44,7 @@ if [ "$os" = "Linux" ]; then
 
   checkInstall "riprep" "rg"
   checkInstall "fd-find" "fdfind"
+  checkInstall "lazygit" "lazygit"
 
 elif [ "$os" = "Darwin" ]; then
 
@@ -54,6 +55,7 @@ elif [ "$os" = "Darwin" ]; then
   checkInstall "riprep" "rg"
   checkInstall "fd" "fd"
   checkInstall "fzf" "fzf"
+  checkInstall "lazygit" "lazygit"
 
 fi
 
