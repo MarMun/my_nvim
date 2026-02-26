@@ -29,3 +29,16 @@
 - Keep config modular in `lua/core/`
 - Plugins in `lua/plugins/` with lazy-loading
 - LSP preferences: TypeScript, Python, Go, Rust
+
+## Key Learnings
+
+### Build System
+- **CMake cache clearing required**: When switching branches (0.10 → 0.11), must `rm -rf .deps build/` before rebuilding
+- **Local install prefix**: Use `CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local"` to avoid sudo
+- **Runtime path mismatch**: Binary version must match runtime version. If nvim loads wrong runtime (e.g., `/usr/local/share/nvim/runtime` instead of `~/.local/share/nvim/runtime`), you'll get errors like `attempt to call method 'match' (a nil value)`
+
+### Config Setup
+- **Config path**: Neovim expects config at `~/.config/nvim/`. If using custom location (`~/.my_nvim/`), create symlink: `ln -sf ~/.my_nvim ~/.config/nvim`
+
+### Dependencies
+- **lazygit required**: `<leader>gg` keymap requires `lazygit` binary installed (not just git). Install to `~/.local/bin/lazygit`
