@@ -51,12 +51,18 @@ if [ "$os" = "Linux" ]; then
   else
     echo ""
     echo "brew is not installed but recommended for better packages (fzf, fd, etc.)"
-    echo "Install brew: https://brew.sh (or run: /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\")"
     echo ""
-    read -p "Abort and install brew manually? [Y/n]: " response
+    read -p "Install brew automatically? [Y/n]: " response
     if [[ "$response" =~ ^[Yy]$ ]] || [ -z "$response" ]; then
-      echo "Aborting. Install brew and re-run this script."
-      exit 1
+      echo "Installing brew..."
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      # Add brew to PATH for this session
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" 2>/dev/null || eval "$($HOME/.linuxbrew/bin/brew shellenv)" 2>/dev/null || true
+      echo "Brew installed. Installing packages..."
+      checkInstall "ripgrep" "rg"
+      checkInstall "fd" "fd"
+      checkInstall "fzf" "fzf"
+      checkInstall "lazygit" "lazygit"
     else
       echo "Continuing with apt (older package versions)..."
       checkInstall "ripgrep" "rg"
