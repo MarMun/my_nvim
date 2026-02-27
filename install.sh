@@ -42,10 +42,29 @@ echo "check / install dependencies"
 
 if [ "$os" = "Linux" ]; then
 
-  checkInstall "riprep" "rg"
-  checkInstall "fd-find" "fdfind"
-  checkInstall "fzf" "fzf"
-  checkInstall "lazygit" "lazygit"
+  # Use brew if available (better packages), otherwise ask
+  if [ -x "$(command -v brew)" ]; then
+    checkInstall "ripgrep" "rg"
+    checkInstall "fd" "fd"
+    checkInstall "fzf" "fzf"
+    checkInstall "lazygit" "lazygit"
+  else
+    echo ""
+    echo "brew is not installed but recommended for better packages (fzf, fd, etc.)"
+    echo "Install brew: https://brew.sh (or run: /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\")"
+    echo ""
+    read -p "Abort and install brew manually? [Y/n]: " response
+    if [[ "$response" =~ ^[Yy]$ ]] || [ -z "$response" ]; then
+      echo "Aborting. Install brew and re-run this script."
+      exit 1
+    else
+      echo "Continuing with apt (older package versions)..."
+      checkInstall "ripgrep" "rg"
+      checkInstall "fd-find" "fdfind"
+      checkInstall "fzf" "fzf"
+      checkInstall "lazygit" "lazygit"
+    fi
+  fi
 
 elif [ "$os" = "Darwin" ]; then
 
@@ -53,7 +72,7 @@ elif [ "$os" = "Darwin" ]; then
     echo "brew missing and needed"
     return
   fi
-  checkInstall "riprep" "rg"
+  checkInstall "ripgrep" "rg"
   checkInstall "fd" "fd"
   checkInstall "fzf" "fzf"
   checkInstall "lazygit" "lazygit"
