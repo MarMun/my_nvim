@@ -15,6 +15,7 @@ vim.keymap.set("t", "jj", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 -- open pi in vertical terminal split
 vim.keymap.set("n", "<leader>pi", ":vsplit | term pi<CR>i", { desc = "Open pi in vertical terminal" })
 
+-- open message history horizontal split
 vim.keymap.set("n", "<leader>mm", ":Noice history<CR>", { desc = "Notify history" })
 
 -- tabs
@@ -25,19 +26,6 @@ vim.keymap.set("n", "<leader>td", vim.cmd.tabclose, { desc = "Tab close" })
 
 -- undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree toggle" })
-
--- keybinds for ai interaction
-vim.keymap.set({ "n", "v" }, "<leader>cvn", "<Cmd>GpChatNew vsplit<CR>", { desc = "AI Chat Vertical" })
-vim.keymap.set({ "n", "v" }, "<leader>cvt", "<Cmd>GpChatToggle vsplit<CR>", { desc = "AI Chat Vertical" })
-vim.keymap.set({ "n", "v" }, "<leader>cvr", "<Cmd>GpChatRespond 3<CR>", { desc = "AI Chat Respond" })
-vim.keymap.set({ "n", "v" }, "<leader>cvd", "<Cmd>GpChatDelete<CR>", { desc = "AI Chat Delete" })
-
-vim.keymap.set({ "n", "v" }, "<leader>cr", "<Cmd>GpRewrite<CR>", { desc = "AI Rewrite" })
-vim.keymap.set({ "n", "v" }, "<leader>ca", "<Cmd>GpAppend<CR>", { desc = "AI Append" })
-vim.keymap.set({ "n", "v" }, "<leader>ci", "<Cmd>GpImplement <CR>", { desc = "AI Implement" })
-vim.keymap.set({ "n", "v" }, "<leader>cp", "<Cmd>GpPopup<CR>", { desc = "AI Popup" })
-vim.keymap.set({ "n", "v" }, "<leader>cc", "<Cmd>GpContext<CR>", { desc = "AI Context" })
-vim.keymap.set({ "n", "v" }, "<leader>cs", "<Cmd>GpContext<CR>", { desc = "AI Stop" })
 
 -- Ollama - Prompt menu
 vim.keymap.set({ "n", "v" }, "<leader>oo", ":<c-u>lua require('ollama').prompt()<cr>", { desc = "Ollama Prompt" })
