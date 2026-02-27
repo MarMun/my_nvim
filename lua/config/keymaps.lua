@@ -12,6 +12,9 @@ vim.keymap.set("i", "jj", "<ESC>", { desc = "End Insert mode" })
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("t", "jj", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+-- open pi in vertical terminal split
+vim.keymap.set("n", "<leader>pi", ":vsplit | term pi<CR>i", { desc = "Open pi in vertical terminal" })
+
 vim.keymap.set("n", "<leader>mm", ":Noice history<CR>", { desc = "Notify history" })
 
 -- tabs
