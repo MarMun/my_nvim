@@ -27,9 +27,6 @@ vim.keymap.set("n", "<leader>td", vim.cmd.tabclose, { desc = "Tab close" })
 -- undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree toggle" })
 
--- Ollama - Prompt menu
-vim.keymap.set({ "n", "v" }, "<leader>oo", ":<c-u>lua require('ollama').prompt()<cr>", { desc = "Ollama Prompt" })
-
 -- Ollama - Direct prompting
 vim.keymap.set(
   "n",
@@ -45,3 +42,6 @@ vim.keymap.set(
   ":<c-u>lua require('ollama').prompt('Language_Identifier')<cr>",
   { desc = "Ollama Prompt" }
 )
+
+-- Ollama - Prompt menu
+vim.keymap.set({ "n", "v" }, "<leader>oo", ":<c-u>lua require('ollama').prompt()<cr>", { desc = "Ollama Prompt" })
