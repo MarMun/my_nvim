@@ -8,6 +8,10 @@ vim.keymap.set("n", "<leader>e", vim.cmd.q, { desc = "Quit Buffer" })
 vim.keymap.set("n", "<leader>we", ":wq<CR>", { desc = "Save & Quit Buffer" })
 vim.keymap.set("i", "jj", "<ESC>", { desc = "End Insert mode" })
 
+-- terminal mode - escape to normal mode
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "jj", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
 vim.keymap.set("n", "<leader>mm", ":Noice history<CR>", { desc = "Notify history" })
 
 -- tabs
