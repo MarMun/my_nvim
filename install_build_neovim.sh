@@ -31,15 +31,30 @@ git pull origin release-0.11 || {
 # Check for clipboard dependencies
 if [ "$os" = "Darwin" ]; then
   if ! command -v brew >/dev/null 2>&1; then
-    echo "Homebrew not found. Please install Homebrew to continue."
-    exit 1
+    echo ""
+    echo "Homebrew is not installed but required for build dependencies."
+    echo ""
+    read -p "Install Homebrew automatically? [Y/n]: " response
+    if [[ "$response" =~ ^[Yy]$ ]] || [ -z "$response" ]; then
+      echo "Installing Homebrew..."
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null || eval "$(/usr/local/bin/brew shellenv)" 2>/dev/null || true
+      echo "Homebrew installed. Installing build dependencies..."
+      brew install cmake ninja libtool automake pkg-config gettext || {
+        echo "Failed to install build dependencies via Homebrew"
+        exit 1
+      }
+    else
+      echo "Cannot continue without Homebrew. Exiting."
+      exit 1
+    fi
+  else
+    echo "Installing build dependencies with Homebrew..."
+    brew install cmake ninja libtool automake pkg-config gettext || {
+      echo "Failed to install build dependencies via Homebrew"
+      exit 1
+    }
   fi
-
-  echo "Installing build dependencies with Homebrew..."
-  brew install cmake ninja libtool automake pkg-config gettext || {
-    echo "Failed to install build dependencies via Homebrew"
-    exit 1
-  }
 else
   if ! dpkg -l | grep -q "libx11-dev"; then
     echo "Installing X11 clipboard dependencies..."
